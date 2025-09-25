@@ -2,7 +2,6 @@ import { GetItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { hashPassword } from "../utils/bcrypt.mjs";
 import { client } from "./client.mjs";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { hash } from "bcrypt";
 import { generateDate } from "../utils/generateDate.mjs";
 
 export const createUser = async (user) => {
@@ -27,7 +26,29 @@ export const createUser = async (user) => {
     await client.send(command);
     return true;
   } catch (error) {
-    console.log("ERROR in db: ", error.message);
+    console.error("ERROR in db: ", error.message);
+    return false;
+  }
+};
+
+export const getUser = async (username) => {
+  const command = new GetItemCommand({
+    TableName: "shui-db",
+    Key: {
+      PK: { S: `USER#${username}` },
+      SK: { S: "PROFILE" },
+    },
+  });
+
+  try {
+    const { Item } = await client.send(command);
+
+    if (!Item) return false;
+    const user = unmarshall(Item);
+
+    return user;
+  } catch (error) {
+    console.error("ERROR in db: ", error.message);
     return false;
   }
 };
