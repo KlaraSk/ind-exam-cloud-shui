@@ -17,6 +17,12 @@ functions:
       - httpApi:
           path: /api/auth/register
           method: POST
+  LoginUser:
+    handler: functions/auth/LoginUser/index.handler
+    events:
+      - httpApi:
+          path: /api/auth/login
+          method: POST
 
 plugins:
   - serverless-offline
