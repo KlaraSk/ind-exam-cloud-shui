@@ -23,6 +23,12 @@ functions:
       - httpApi:
           path: /api/auth/login
           method: POST
+  PostMessage:
+    handler: functions/messages/PostMessage/index.handler
+    events:
+      - httpApi:
+          path: /api/messages
+          method: POST
 
 plugins:
   - serverless-offline
