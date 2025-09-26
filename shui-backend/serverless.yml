@@ -35,6 +35,12 @@ functions:
       - httpApi:
           path: /api/messages
           method: GET
+  DeleteMessage:
+    handler: functions/messages/DeleteMessage/index.handler
+    events:
+      - httpApi:
+          path: /api/messages/{id}
+          method: DELETE
 
 plugins:
   - serverless-offline

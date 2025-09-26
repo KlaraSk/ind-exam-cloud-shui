@@ -10,7 +10,6 @@ export const handler = middy(async (event) => {
   const message = event.body.message;
 
   const username = event.user.attributes.username;
-  console.log("username: ", username);
 
   const result = await addMessage(username, message);
 

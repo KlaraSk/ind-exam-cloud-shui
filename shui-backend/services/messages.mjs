@@ -2,13 +2,11 @@ import { client } from "./client.mjs";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { generateDate } from "../utils/generateDate.mjs";
 import { generateId } from "../utils/generateId.mjs";
-import { PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { DeleteItemCommand, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 
 export const addMessage = async (username, message) => {
   const messageId = generateId(5);
   const date = generateDate();
-  console.log("date: ", date);
-  console.log("messageId: ", messageId);
 
   const command = new PutItemCommand({
     TableName: "shui-db",
@@ -76,5 +74,47 @@ export const getMessagesByUser = async (username) => {
   } catch (error) {
     console.error("ERROR in db: ", error.message);
     return [];
+  }
+};
+
+export const getMessageById = async (id) => {
+  const command = new QueryCommand({
+    TableName: "shui-db",
+    IndexName: "GSI1",
+    KeyConditionExpression: "GSI1PK = :pk AND GSI1SK = :sk",
+    ExpressionAttributeValues: marshall({
+      ":pk": "MESSAGE",
+      ":sk": id,
+    }),
+  });
+  try {
+    const { Items } = await client.send(command);
+
+    if (!Items) throw new Error("No message found");
+    const message = unmarshall(Items[0]);
+
+    return message;
+  } catch (error) {
+    console.log("ERROR in db:", error.message);
+    return false;
+  }
+};
+
+export const deleteMessage = async (message) => {
+  const command = new DeleteItemCommand({
+    TableName: "shui-db",
+    Key: marshall({
+      PK: message.PK,
+      SK: message.SK,
+    }),
+
+    ReturnValues: "ALL_OLD",
+  });
+  try {
+    const result = await client.send(command);
+    return result;
+  } catch (error) {
+    console.log("ERROR in db", error.message);
+    return false;
   }
 };
