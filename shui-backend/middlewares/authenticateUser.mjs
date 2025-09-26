@@ -9,8 +9,7 @@ export const authenticateUser = () => ({
     const token = authHeader.split(" ")[1];
     try {
       const user = verifyToken(token);
-      console.log("token: ", token);
-      console.log("user: ", user);
+
       if (!user) throw new Error("Unauthorized");
 
       handler.event.user = user;
