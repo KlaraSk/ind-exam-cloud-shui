@@ -1,0 +1,60 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  list-style-position: inside;
+  /* outline: 1pt solid greenyellow; */
+}
+
+:root {
+  /* Colors */
+
+  /* Fonts */
+
+  --fs-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  --fs-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  --fs-md: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  --fs-xxl: clamp(1.6rem, 1.5rem + 0.9vw, 2.5rem);
+  --fs-xxxl: clamp(3rem, 2rem + 0.9vw, 3rem);
+
+  /* Font weights */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+}
+
+.heading-xl {
+  font-size: var(--fs-xxxl);
+}
+.heading-1 {
+  font-size: var(--fs-xxl);
+}
+
+.heading-2 {
+  font-size: var(--fs-xl);
+}
+
+.heading-3 {
+  font-size: var(--fs-lg);
+}
+.heading-4 {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.body {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.label {
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
