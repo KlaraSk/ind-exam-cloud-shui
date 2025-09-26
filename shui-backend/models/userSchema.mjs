@@ -4,7 +4,7 @@ import Joi from "joi";
 const passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
 export const userSchema = Joi.object({
-  username: Joi.string().alphanum().min(5).required(),
+  username: Joi.string().alphanum().min(5).max(15).required(),
   password: Joi.string()
     .pattern(passwordRegEx)
     .messages({

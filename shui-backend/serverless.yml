@@ -29,6 +29,12 @@ functions:
       - httpApi:
           path: /api/messages
           method: POST
+  GetMessages:
+    handler: functions/messages/GetMessages/index.handler
+    events:
+      - httpApi:
+          path: /api/messages
+          method: GET
 
 plugins:
   - serverless-offline
