@@ -2,7 +2,7 @@ import { client } from "./client.mjs";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { generateDate } from "../utils/generateDate.mjs";
 import { generateId } from "../utils/generateId.mjs";
-import { DeleteItemCommand, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { DeleteItemCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 
 export const addMessage = async (username, message) => {
   const messageId = generateId(5);
@@ -115,6 +115,30 @@ export const deleteMessage = async (message) => {
     return result;
   } catch (error) {
     console.log("ERROR in db", error.message);
+    return false;
+  }
+};
+
+export const updateMessage = async (message, newContent) => {
+  const command = new UpdateItemCommand({
+    TableName: "shui-db",
+    Key: marshall({
+      PK: message.PK,
+      SK: message.SK,
+    }),
+    UpdateExpression: "SET attributes.modifiedAt = :modifiedAt, attributes.message = :message",
+    ExpressionAttributeValues: marshall({
+      ":modifiedAt": generateDate(),
+      ":message": newContent.message,
+    }),
+    ReturnValues: "ALL_NEW",
+  });
+
+  try {
+    const result = await client.send(command);
+    return unmarshall(result.Attributes);
+  } catch (error) {
+    console.log("ERROR in db:", error.message);
     return false;
   }
 };

@@ -1,22 +1,25 @@
 import middy from "@middy/core";
+import httpJsonBodyParser from "@middy/http-json-body-parser";
 import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 import { sendResponse } from "../../../responses/index.mjs";
+import { validateMessage } from "../../../middlewares/validateMessage.mjs";
 import { authenticateUser } from "../../../middlewares/authenticateUser.mjs";
 import { validateId } from "../../../middlewares/validateId.mjs";
-import { deleteMessage, getMessageById } from "../../../services/messages.mjs";
+import { getMessageById, updateMessage } from "../../../services/messages.mjs";
 
 export const handler = middy(async (event) => {
   const id = event.pathParameters.id;
+  const newContent = event.body;
   const message = await getMessageById(id);
 
   // Om den inloggade usern är samma som meddelandets user --> fortsätt.
   if (event.user.PK === message.PK) {
-    const result = await deleteMessage(message);
-    // Funktionen deleteOrder() innehåller nyckeln ReturnValues: 'ALL_OLD'. Det innebär att det raderade objektet finns med i svaret från funktionen, under result.Attributes. Om result.Attributes saknas har funktionen alltså inte lyckats hitta och radera något objekt.
-    if (result.Attributes) return sendResponse(200, { message: "Order deleted" });
-    else return sendResponse(404, { message: "Order could not be found" });
+    const newMessage = await updateMessage(message, newContent);
+    return sendResponse(200, { message: "Update successfull", data: newMessage });
   } else throw new Error("Unauthorized user or invalid message id");
 })
-  .use(validateId())
   .use(authenticateUser())
+  .use(validateId())
+  .use(httpJsonBodyParser())
+  .use(validateMessage())
   .use(errorHandler());
