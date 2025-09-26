@@ -41,6 +41,12 @@ functions:
       - httpApi:
           path: /api/messages/{id}
           method: DELETE
+  PutMessage:
+    handler: functions/messages/PutMessage/index.handler
+    events:
+      - httpApi:
+          path: /api/messages/{id}
+          method: PUT
 
 plugins:
   - serverless-offline
