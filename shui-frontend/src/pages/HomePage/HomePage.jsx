@@ -12,7 +12,7 @@ function HomePage() {
       setMessages(response.data);
     };
     setupMessages();
-    loginUser();
+    // loginUser();
     // regTest();
   }, []);
 
@@ -20,14 +20,14 @@ function HomePage() {
     console.log("messages: ", messages);
   }, [messages]);
 
-  const loginUser = async (e) => {
-    // e.preventDefault();
-    const result = await loginApi({
-      username: "klara",
-      password: "Test123!",
-    });
-    console.log(result.data.message);
-  };
+  // const loginUser = async (e) => {
+  //   // e.preventDefault();
+  //   const result = await loginApi({
+  //     username: "klara",
+  //     password: "Test123!",
+  //   });
+  //   console.log(result.data.message);
+  // };
 
   const regTest = async (data) => {
     const result = await registerApi({

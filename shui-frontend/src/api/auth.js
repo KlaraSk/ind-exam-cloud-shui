@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const loginApi = async (data) => {
-  const response = await axios
+  const result = await axios
     .post("https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/auth/login", data)
     .then((response) => {
       return response;
@@ -10,8 +10,8 @@ export const loginApi = async (data) => {
       return error;
     });
 
-  if (response.status === 200) return response;
-  else return response.message;
+  if (result.status === 200) return result;
+  else return result.response;
 };
 
 export const registerApi = async (data) => {

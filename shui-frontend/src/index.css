@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Titan+One&display=swap");
+
 *,
 *::before,
 *::after {
@@ -11,8 +13,16 @@
 
 :root {
   /* Colors */
+  --beige: #f8eee2;
+  --light-grey: #595550;
+  --dark-grey: #3c3a37;
+  --light-purple: #8590c8;
+  --dark-purple: #606db6;
+  --red: #b34734;
 
   /* Fonts */
+  --ff-nunito: "Nunito", sans-serif;
+  --ff-titan-one: "Titan One", sans-serif;
 
   --fs-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
   --fs-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
@@ -25,9 +35,19 @@
   /* Font weights */
   --weight-light: 300;
   --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
+  --weight-medium: 600;
+  --weight-semibold: 700;
+  --weight-bold: 850;
+}
+
+.heading-xl,
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4,
+.body,
+.label {
+  font-family: var(--ff-nunito);
 }
 
 .heading-xl {
@@ -35,10 +55,12 @@
 }
 .heading-1 {
   font-size: var(--fs-xxl);
+  font-weight: var(--weight-bold);
 }
 
 .heading-2 {
   font-size: var(--fs-xl);
+  font-weight: var(--weight-semibold);
 }
 
 .heading-3 {
@@ -47,14 +69,47 @@
 .heading-4 {
   font-size: var(--fs-sm);
   line-height: 1.6;
+  font-weight: var(--weight-semibold);
 }
 
 .body {
   font-size: var(--fs-sm);
   line-height: 1.6;
+  font-weight: var(--weight-medium);
 }
 
 .label {
   font-size: var(--fs-xs);
   line-height: 1.6;
+  font-weight: var(--weight-medium);
+}
+
+.font-color__red {
+  color: var(--red);
+}
+
+/* ===== Allmänt ===== */
+
+.app {
+  background-color: var(--beige);
+  min-height: 100vh;
+  max-width: 430px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.page {
+  height: 100%;
+  margin: 0rem 2rem;
+}
+
+/* ===== Flex och grid ===== */
+
+.flex {
+  display: flex;
+}
+
+.flex__column {
+  flex-direction: column;
 }
