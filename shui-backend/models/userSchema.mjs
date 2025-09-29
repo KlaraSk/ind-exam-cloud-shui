@@ -3,8 +3,11 @@ import Joi from "joi";
 // Kräver följande: 1 versal, 1 gemen, 1 specialtecken, 1 siffra 0-9. Från sidan https://ihateregex.io/expr/password/. Älskar domännamnet.
 const passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
+// Regex användarnamn. a-z,A-Z, 0-9 och åäö ok. Min fem tecken, max 15 tecken.
+const usernameRegEx = /^[A-Za-z0-9ÅÄÖåäö]{5,15}$/;
+
 export const userSchema = Joi.object({
-  username: Joi.string().alphanum().min(5).max(15).required(),
+  username: Joi.string().pattern(usernameRegEx).messages("Valid characters: a-ö,A-Ö, 0-9").required(),
   password: Joi.string()
     .pattern(passwordRegEx)
     .messages({
@@ -12,5 +15,5 @@ export const userSchema = Joi.object({
     })
     .required(),
   email: Joi.string().email().required(),
-  role: Joi.string().valid("GUEST", "ADMIN").required().messages({ "any.only": "Roll får endast vara GUEST eller ADMIN" }),
+  role: Joi.string().valid("GUEST", "ADMIN").required().messages({ "any.only": "Role must be  GUEST or ADMIN" }),
 });

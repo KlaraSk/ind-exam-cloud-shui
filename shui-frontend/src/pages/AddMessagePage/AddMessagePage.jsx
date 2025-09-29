@@ -12,8 +12,6 @@ function AddMessagePage() {
 
   useEffect(() => {
     const handleSubmit = async (e) => {
-      // e.preventDefault();
-
       const response = await postMessage(messageData, token);
       console.log(response);
     };
