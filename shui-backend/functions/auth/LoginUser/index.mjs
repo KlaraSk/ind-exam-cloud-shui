@@ -15,8 +15,14 @@ export const handler = middy(async (event) => {
 
     if (validPassword) {
       const token = generateToken(result);
+      console.log("result from db: ", result);
 
-      return sendResponse(200, { message: "User logged in successfully.", role: result.attributes.role, token: `Bearer ${token}` });
+      return sendResponse(200, {
+        message: "User logged in successfully.",
+        username: result.attributes.username,
+        role: result.attributes.role,
+        token: `Bearer ${token}`,
+      });
     } else return sendResponse(401, { message: "Invalid password" });
   } else return sendResponse(404, { message: "User not found" });
 })
