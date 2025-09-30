@@ -39,9 +39,9 @@ function RegisterForm({ setIsLogin }) {
   };
 
   return (
-    <>
-      <h1 className="heading-2">Registrera konto</h1>
-      <p className="body form__text">Shui är din digitala anslagstavla. Skapa ett konto för att komma igång.</p>
+    <section className="page__wrapper">
+      <h1 className="heading-2 text-align-center">Registrera konto</h1>
+      <p className="body text-align-center">Shui är din digitala anslagstavla. Skapa ett konto för att komma igång.</p>
       <form
         className="form label flex flex__column"
         noValidate
@@ -100,7 +100,7 @@ function RegisterForm({ setIsLogin }) {
         </label>
         <PurpleButton type={"submit"}>Registrera konto</PurpleButton>
       </form>
-    </>
+    </section>
   );
 }
 
