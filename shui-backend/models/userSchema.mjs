@@ -7,7 +7,7 @@ const passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])
 const usernameRegEx = /^[A-Za-z0-9ÅÄÖåäö]{5,15}$/;
 
 export const userSchema = Joi.object({
-  username: Joi.string().pattern(usernameRegEx).messages("Valid characters: a-ö,A-Ö, 0-9").required(),
+  username: Joi.string().pattern(usernameRegEx).messages({ "string.pattern.base": "Valid characters: a-ö,A-Ö, 0-9" }).required(),
   password: Joi.string()
     .pattern(passwordRegEx)
     .messages({
