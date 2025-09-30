@@ -6,12 +6,16 @@ import { loginApi } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthToken } from "../../hooks/useAuthToken";
 import { PurpleButton } from "../../components-styled/Button/Button.styles";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 function LoginForm() {
   const form = useRef();
   const [error, setError] = useState({ isError: false, errorMsg: "" });
   let navigate = useNavigate();
   const { setToken } = useAuthToken();
+  const login = useAuthStore((state) => state.login);
+  const { user } = useAuthStore();
+  console.log("user: ", user);
 
   // Validering från React Form
   const {
@@ -28,7 +32,10 @@ function LoginForm() {
 
     // Vid lyckad inloggning sparas token i localStorage (jepp, vet att det inte är optimalt, men vågar mig inte på cookies än). Användaren skickas till startsidan.
     if (result.status === 200) {
+      console.log("result.data: ", result.data);
+
       setToken(result.data.token);
+      login({ username: result.data.username, role: result.data.role, token: result.data.token });
       navigate("/");
     } else {
       setError({ isError: true, errorMsg: "Ogiltigt användarnamn eller lösenord" });
@@ -36,9 +43,9 @@ function LoginForm() {
   };
 
   return (
-    <>
-      <h1 className="heading-2">Logga in</h1>
-      <p className="body form__text">Logga in för att skapa, redigera eller radera meddelanden.</p>
+    <section className="page__wrapper">
+      <h1 className="heading-2 text-align-center">Logga in</h1>
+      <p className="body text-align-center">Logga in för att skapa, redigera eller radera meddelanden.</p>
       <form
         className="form label flex flex__column"
         noValidate
@@ -80,7 +87,7 @@ function LoginForm() {
         </label>
         <PurpleButton type={"submit"}>Logga in</PurpleButton>
       </form>
-    </>
+    </section>
   );
 }
 

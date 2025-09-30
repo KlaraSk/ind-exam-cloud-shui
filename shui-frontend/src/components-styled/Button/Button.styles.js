@@ -4,12 +4,24 @@ export const BasicButton = styled.button`
   border: none;
   cursor: pointer;
   transition: 0.5s all ease-out;
-  color: var(--beige);
+`;
+
+export const CircleButton = styled(BasicButton)`
+  background-color: var(--dark-purple);
+  font-size: 1.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: var(--white);
 `;
 
 export const LinkButton = styled(BasicButton)`
   color: var(--red);
 `;
+
+export const LinkButtonPurple = styled(BasicButton)`
+  color: var(--dark-purple);
+`;
+
 export const PurpleButton = styled(BasicButton)`
   border: none;
   background-color: var(--dark-purple);

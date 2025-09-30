@@ -1,0 +1,34 @@
+.home-page {
+  position: relative;
+}
+
+.home-page__header {
+  position: relative;
+  padding: 2rem 0rem;
+
+  align-items: center;
+}
+
+.home-page__auth-btn {
+  align-self: flex-start;
+  gap: 0.25rem;
+}
+
+.home-page__heading {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.home-page__footer {
+  position: fixed;
+  background-color: var(--beige);
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  max-width: 430px;
+  margin-left: 0;
+  bottom: 0;
+  padding: 2rem 0rem;
+  bottom: 0;
+}
