@@ -8,8 +8,9 @@ import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 export const handler = middy(async (event) => {
   const result = await createUser(event.body);
 
-  if (result) return sendResponse(201, { message: "User created successfully." });
-  else return sendResponse(404, { message: "User could not be created." });
+  if (result === 201) return sendResponse(201, { message: "User created successfully." });
+  else if (result === 404) return sendResponse(404, { message: "User could not be created." });
+  else if (result === 409) return sendResponse(409, { message: "Username already exists in database." });
 })
   .use(httpJsonBodyParser())
   .use(validateUser())

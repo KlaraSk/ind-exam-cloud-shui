@@ -20,14 +20,17 @@ export const createUser = async (user) => {
         },
       },
     },
+    // Kollar om användarnamnet redan finns
+    ConditionExpression: "attribute_not_exists(PK)",
   });
 
   try {
     await client.send(command);
-    return true;
+    return 201;
   } catch (error) {
     console.error("ERROR in db: ", error.message);
-    return false;
+    if (error.message === "The conditional request failed") return 409;
+    else return 404;
   }
 };
 
