@@ -20,12 +20,22 @@ export const createUser = async (user) => {
         },
       },
     },
+    // Kollar om användarnamnet redan finns
+    ConditionExpression: "attribute_not_exists(PK)",
   });
 
   try {
-    await client.send(command);
+    const result = await client.send(command);
+
+    console.log("result: ", result);
+
     return true;
   } catch (error) {
+    if (error.name === "ConditionalCheckFailedException") {
+      console.error("ERROR in db: ", error.message);
+
+      return false;
+    }
     console.error("ERROR in db: ", error.message);
     return false;
   }

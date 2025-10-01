@@ -15,5 +15,5 @@ export const userSchema = Joi.object({
     })
     .required(),
   email: Joi.string().email().required(),
-  role: Joi.string().valid("GUEST", "ADMIN").required().messages({ "any.only": "Role must be  GUEST or ADMIN" }),
+  role: Joi.string().valid("GUEST", "ADMIN").messages({ "any.only": "Role must be  GUEST or ADMIN" }).required(),
 });
