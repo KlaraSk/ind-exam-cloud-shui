@@ -25,19 +25,12 @@ export const createUser = async (user) => {
   });
 
   try {
-    const result = await client.send(command);
-
-    console.log("result: ", result);
-
-    return true;
+    await client.send(command);
+    return 201;
   } catch (error) {
-    if (error.name === "ConditionalCheckFailedException") {
-      console.error("ERROR in db: ", error.message);
-
-      return false;
-    }
     console.error("ERROR in db: ", error.message);
-    return false;
+    if (error.message === "The conditional request failed") return 409;
+    else return 404;
   }
 };
 
