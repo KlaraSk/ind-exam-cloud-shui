@@ -1,0 +1,7 @@
+.header {
+  position: sticky;
+  top: 0;
+  padding: 2rem 0rem;
+  z-index: 1;
+  background-color: var(--beige);
+}

@@ -10,8 +10,10 @@ export const BasicButton = styled.button`
 
 export const CircleButton = styled(BasicButton)`
   background-color: var(--dark-purple);
-  font-size: 1.4rem;
+  font-size: 1rem;
+  // padding: 0.25rem;
   aspect-ratio: 1;
+  max-width: 40px;
   border-radius: 50%;
   color: var(--white);
 `;
@@ -26,17 +28,59 @@ export const SquareButton = styled(BasicButton)`
 `;
 
 export const LinkButton = styled(BasicButton)`
-  color: var(--red);
+  color: var(--dark-brown);
+  position: relative;
+  display: inline-block;
+  
+  &:after,
+  &:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--dark-brown));
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+  }
+
+  &:before{
+  top: -5px;
+  transform-origin: left;
+  }
+  
+  &:hover::after,
+  &:hover::before {
+   transform: scaleX(1);
+    }
+  }
+}
 `;
 
-export const LinkButtonPurple = styled(BasicButton)`
+export const LinkButtonRed = styled(LinkButton)`
+  color: var(--red);
+
+  &:after,
+  &:before {
+    background: linear-gradient(to right, var(--red));
+  }
+`;
+
+export const LinkButtonPurple = styled(LinkButton)`
   color: var(--dark-purple);
+
+  &:after,
+  &:before {
+    background: linear-gradient(to right, var(--dark-purple));
+  }
 `;
 
 export const PurpleButton = styled(BasicButton)`
   border: none;
   background-color: var(--dark-purple);
-  color: var(--beige);
+  color: var(--white);
   width: 100%;
   padding: 0.75rem;
   border-radius: 0.75rem;

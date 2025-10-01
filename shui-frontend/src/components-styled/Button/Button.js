@@ -1,4 +1,4 @@
-import { BasicButton, LinkButton, PurpleButton, CircleButton, LinkButtonPurple, SquareButton } from "./Button.styles.js";
+import { BasicButton, LinkButton, LinkButtonRed, PurpleButton, CircleButton, LinkButtonPurple, SquareButton } from "./Button.styles.js";
 
 export default BasicButton;
-export { LinkButton, PurpleButton, CircleButton, LinkButtonPurple, SquareButton };
+export { LinkButton, LinkButtonRed, PurpleButton, CircleButton, LinkButtonPurple, SquareButton };

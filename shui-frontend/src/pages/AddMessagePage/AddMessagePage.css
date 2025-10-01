@@ -1,0 +1,8 @@
+.add-message-page__header {
+  position: relative;
+}
+.add-message-page__title {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}

@@ -10,6 +10,10 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import { MessagesContext } from "../../App.jsx";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaArrowDown } from "react-icons/fa6";
+import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
+import { IoFilter } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa6";
 
 function HomePage() {
   const [messages, setMessages] = useState([]);
@@ -39,8 +43,8 @@ function HomePage() {
   };
 
   return (
-    <section className="page home-page">
-      <header className="page__wrapper flex home-page__header ">
+    <section className="page home-page font-color__dark-brown">
+      <Header className="home-page__header">
         <div className="flex flex__column home-page__auth-btn">
           <CircleButton onClick={!user ? handleLogin : handleLogout} aria-label={!user ? "Logga in" : "Logga ut"}>
             {<FaUser />}
@@ -48,27 +52,43 @@ function HomePage() {
           <BasicButton
             onClick={!user ? handleLogin : handleLogout}
             aria-label={!user ? "Logga in" : "Logga ut"}
-            className="label font-color__dark-grey"
+            className="label font-color__dark-brown"
           >
             {!user ? "Logga in" : "Logga ut"}
           </BasicButton>
+          {user && <span className="label">{user.username}</span>}
         </div>
 
         <h1 className="heading-2 home-page__heading">Meddelanden</h1>
-      </header>
+      </Header>
       <section className="page__wrapper">
-        <BasicButton className="flex font-color__dark-grey">
-          {<span className="label">Nyast först</span>}
-          {<FaArrowDown className="font-color__dark-purple" />}
-        </BasicButton>
+        <section className="filters flex ">
+          <h2 className="heading-4 page__wrapper flex filters__title">
+            <IoFilter aria-hidden="true" />
+            Filter
+          </h2>
+          <BasicButton className="flex font-color__dark-brown page__wrapper">
+            {<span className="label">Nyast först</span>}
+            {<FaArrowDown aria-hidden="true" className="font-color__dark-purple" />}
+          </BasicButton>
+          <BasicButton className="flex font-color__dark-brown page__wrapper">
+            {<span className="label">Användare</span>}
+            {<FaUsers aria-hidden="true" className="font-color__dark-purple" />}
+          </BasicButton>
+        </section>
+
         <List>{messages && generateMessages(messages)}</List>
       </section>
 
-      <footer className="footer flex home-page__footer">
-        <SquareButton onClick={!user ? () => navigate("/konto") : () => navigate("/meddelande")} className="home-page__edit-button">
+      <Footer extraClasses={"home-page__footer"}>
+        <SquareButton
+          aria-label="Skapa ett meddelande"
+          onClick={!user ? () => navigate("/konto") : () => navigate("/meddelande")}
+          className="home-page__edit-button"
+        >
           <MdModeEditOutline />
         </SquareButton>
-      </footer>
+      </Footer>
     </section>
   );
 }
