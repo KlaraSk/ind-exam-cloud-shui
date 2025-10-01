@@ -15,8 +15,7 @@
   /* Colors */
   --beige: #f8eee2;
   --white: #fffdfa;
-  --light-grey: #595550;
-  --dark-grey: #3c3a37;
+  --dark-brown: #403b36;
   --light-purple: #8590c8;
   --dark-purple: #606db6;
   --red: #b34734;
@@ -85,12 +84,8 @@
   font-weight: var(--weight-semibold);
 }
 
-.font-color__dark-grey {
-  color: var(--dark-grey);
-}
-
-.font-color__light-grey {
-  color: var(--light-grey);
+.font-color__dark-brown {
+  color: var(--dark-brown);
 }
 
 .font-color__beige {

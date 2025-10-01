@@ -15,7 +15,7 @@ function ListItem({ item }) {
   };
 
   return (
-    <li className="list-item font-color-light-grey">
+    <li className="list-item font-color__dark-brown">
       <div className="flex list-item__top">
         <h2 className="heading-4">
           {item.attributes.user}

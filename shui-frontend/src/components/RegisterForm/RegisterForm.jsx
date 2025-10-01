@@ -30,7 +30,11 @@ function RegisterForm({ setIsLogin }) {
   console.log(errors);
 
   const registerUser = async (data) => {
-    const result = await registerApi({ username: data.username, email: data.email, password: data.password, role: "GUEST" });
+    console.log("data i registerUser: ", data);
+
+    // const result = await registerApi({ username: data.username, email: data.email, password: data.password, role: "GUEST" });
+    const result = await registerApi({ ...data, role: "GUEST" });
+    console.log("result från registerForm", result);
 
     // Vid lyckad registrering sätts isLogin till true och användaren skickas till inloggningsformuläret.
     if (result.status === 201) {
@@ -39,7 +43,7 @@ function RegisterForm({ setIsLogin }) {
   };
 
   return (
-    <section className="page__wrapper">
+    <section className="page__wrapper font-color__dark-brown">
       <h1 className="heading-2 text-align-center">Registrera konto</h1>
       <p className="body text-align-center">Shui är din digitala anslagstavla. Skapa ett konto för att komma igång.</p>
       <form

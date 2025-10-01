@@ -26,8 +26,10 @@ export const postMessage = async (data, token) => {
       return response;
     })
     .catch((error) => {
-      return response.data.message;
+      return error.response;
     });
+
+  return response;
 };
 
 export const deleteMessage = async (messageId, token) => {
@@ -39,6 +41,7 @@ export const deleteMessage = async (messageId, token) => {
       return response;
     })
     .catch((error) => {
-      return response.data.message;
+      return error.response.data.message;
     });
+  return response;
 };

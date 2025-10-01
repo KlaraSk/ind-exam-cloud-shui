@@ -27,7 +27,6 @@ function LoginForm() {
 
   const loginUser = async (data) => {
     const result = await loginApi(data);
-    console.log(result);
 
     // Vid lyckad inloggning sparas token i localStorage (jepp, vet att det inte är optimalt, men vågar mig inte på cookies än). Användaren skickas till startsidan.
     if (result.status === 200) {
@@ -41,7 +40,7 @@ function LoginForm() {
   };
 
   return (
-    <section className="page__wrapper">
+    <section className="page__wrapper font-color__dark-brown">
       <h1 className="heading-2 text-align-center">Logga in</h1>
       <p className="body text-align-center">Logga in för att skapa, redigera eller radera meddelanden.</p>
       <form
@@ -53,7 +52,7 @@ function LoginForm() {
         })}
       >
         {/*  ===== Användarnamn ===== */}
-        <label className="flex flex__column form__label">
+        <label className="flex flex__column form__label ">
           Användarnamn
           <span className="form__error">
             {errors.username?.message}
