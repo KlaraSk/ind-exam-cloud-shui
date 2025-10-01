@@ -15,7 +15,6 @@ function LoginForm() {
   const { setToken } = useAuthToken();
   const login = useAuthStore((state) => state.login);
   const { user } = useAuthStore();
-  console.log("user: ", user);
 
   // Validering från React Form
   const {
@@ -32,10 +31,9 @@ function LoginForm() {
 
     // Vid lyckad inloggning sparas token i localStorage (jepp, vet att det inte är optimalt, men vågar mig inte på cookies än). Användaren skickas till startsidan.
     if (result.status === 200) {
-      console.log("result.data: ", result.data);
-
       setToken(result.data.token);
       login({ username: result.data.username, role: result.data.role, token: result.data.token });
+
       navigate("/");
     } else {
       setError({ isError: true, errorMsg: "Ogiltigt användarnamn eller lösenord" });

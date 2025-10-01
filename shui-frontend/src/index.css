@@ -97,8 +97,16 @@
   color: var(--beige);
 }
 
+.font-color__white {
+  color: var(--white);
+}
+
 .font-color__red {
   color: var(--red);
+}
+
+.font-color__dark-purple {
+  color: var(--dark-purple);
 }
 
 /* ===== Allmänt ===== */
@@ -125,6 +133,9 @@
   text-align: center;
 }
 
+.d-none {
+  opacity: 0;
+}
 /* ===== Flex och grid ===== */
 
 .flex {

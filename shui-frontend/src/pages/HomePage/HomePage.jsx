@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getMessages } from "../../api/messages";
 import "./HomePage.css";
-
 import List from "../../components/List/List";
 import ListItem from "../../components/ListItem/ListItem";
-import { BasicButton, PurpleButton, CircleButton } from "../../components-styled/Button/Button.styles";
+import { BasicButton, CircleButton, SquareButton } from "../../components-styled/Button/Button.styles";
 import { FaUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { MessagesContext } from "../../App.jsx";
+import { MdModeEditOutline } from "react-icons/md";
+import { FaArrowDown } from "react-icons/fa6";
 
 function HomePage() {
   const [messages, setMessages] = useState([]);
+
+  const { isListEdited } = useContext(MessagesContext);
+
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
 
@@ -20,11 +25,7 @@ function HomePage() {
       setMessages(response.data);
     };
     setupMessages();
-  }, []);
-
-  useEffect(() => {
-    console.log("messages: ", messages);
-  }, [messages]);
+  }, [isListEdited]);
 
   const generateMessages = (arr) => {
     return arr.map((item) => <ListItem item={item} key={item.SK}></ListItem>);
@@ -44,7 +45,11 @@ function HomePage() {
           <CircleButton onClick={!user ? handleLogin : handleLogout} aria-label={!user ? "Logga in" : "Logga ut"}>
             {<FaUser />}
           </CircleButton>
-          <BasicButton aria-label={!user ? "Logga in" : "Logga ut"} className="label font-color__dark-grey">
+          <BasicButton
+            onClick={!user ? handleLogin : handleLogout}
+            aria-label={!user ? "Logga in" : "Logga ut"}
+            className="label font-color__dark-grey"
+          >
             {!user ? "Logga in" : "Logga ut"}
           </BasicButton>
         </div>
@@ -52,12 +57,17 @@ function HomePage() {
         <h1 className="heading-2 home-page__heading">Meddelanden</h1>
       </header>
       <section className="page__wrapper">
+        <BasicButton className="flex font-color__dark-grey">
+          {<span className="label">Nyast först</span>}
+          {<FaArrowDown className="font-color__dark-purple" />}
+        </BasicButton>
         <List>{messages && generateMessages(messages)}</List>
       </section>
 
-      <footer className="footer  home-page__footer">
-        {/* //! Inloggad användare - vid klick på pennan kommer man till editpage. Ej inloggad till loginsida. Ska vara en penn-symbol istället, temporär knapp       */}
-        <PurpleButton>penna</PurpleButton>
+      <footer className="footer flex home-page__footer">
+        <SquareButton onClick={!user ? () => navigate("/konto") : () => navigate("/meddelande")} className="home-page__edit-button">
+          <MdModeEditOutline />
+        </SquareButton>
       </footer>
     </section>
   );

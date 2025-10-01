@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { postMessage } from "../../api/messages";
-import "./AddMessagePage.css";
+import "./EditMessagePage.css";
 
-function AddMessagePage() {
+function EditMessagePage() {
   // const messageData = {
   //   message: "Skickar meddelande från frontend",
   // };
@@ -18,7 +18,7 @@ function AddMessagePage() {
   //   handleSubmit();
   // }, []);
 
-  return <section className="page">AddMsgPage</section>;
+  return <section className="page">EditMsgPage</section>;
 }
 
-export default AddMessagePage;
+export default EditMessagePage;
