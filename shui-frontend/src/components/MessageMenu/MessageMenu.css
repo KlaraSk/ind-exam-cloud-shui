@@ -1,0 +1,12 @@
+.menu {
+  position: relative;
+}
+
+.menu__list {
+  position: absolute;
+  right: 0;
+  background-color: var(--dark-purple);
+  padding: 0.5rem;
+  border-radius: 12px;
+  gap: 0.25rem;
+}

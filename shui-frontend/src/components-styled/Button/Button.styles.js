@@ -4,6 +4,8 @@ export const BasicButton = styled.button`
   border: none;
   cursor: pointer;
   transition: 0.5s all ease-out;
+  background: none;
+  align-items: center;
 `;
 
 export const CircleButton = styled(BasicButton)`
@@ -11,6 +13,15 @@ export const CircleButton = styled(BasicButton)`
   font-size: 1.4rem;
   aspect-ratio: 1;
   border-radius: 50%;
+  color: var(--white);
+`;
+
+export const SquareButton = styled(BasicButton)`
+  background-color: var(--dark-purple);
+  font-size: 1.75rem;
+  padding: 0.75rem;
+  border: 1.5px solid var(--light-purple);
+  border-radius: 12px;
   color: var(--white);
 `;
 

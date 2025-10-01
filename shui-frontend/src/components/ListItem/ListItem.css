@@ -3,3 +3,7 @@
   border-radius: 12px;
   padding: 1rem 1.5rem;
 }
+
+.list-item__top {
+  justify-content: space-between;
+}

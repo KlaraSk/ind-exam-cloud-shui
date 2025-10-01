@@ -32,3 +32,11 @@
   padding: 2rem 0rem;
   bottom: 0;
 }
+
+.home-page__edit-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
