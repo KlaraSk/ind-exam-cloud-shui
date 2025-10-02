@@ -45,3 +45,19 @@ export const deleteMessage = async (messageId, token) => {
     });
   return response;
 };
+
+export const putMessageById = async (messageId, data, token) => {
+  const response = await axios
+    .put(`https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages/${messageId}`, data, {
+      headers: { Authorization: token, "Content-Type": "application/json" },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+
+      return error.response;
+    });
+  return response;
+};

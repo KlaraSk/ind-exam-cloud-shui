@@ -21,7 +21,7 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { username: "", password: "" } });
+  } = useForm({ defaultValues: { username: "klara", password: "Test123!" } });
 
   console.log(errors);
 
@@ -62,6 +62,7 @@ function LoginForm() {
             type="text"
             className="form__input"
             autoComplete="Användarnamn"
+            placeholder="Shuiuser"
             required
             {...register("username", { required: "Fyll i användarnamn" })}
           />
@@ -76,8 +77,8 @@ function LoginForm() {
           <input
             type="password"
             className="form__input"
-            defaultValue={"Test123!"}
             autoComplete="Lösenord"
+            placeholder="**************"
             {...register("password", { required: "Fyll i lösenord" })}
             required
           />
