@@ -12,12 +12,11 @@ export const formatDate = (date) => {
   return `${dayMonth} kl. ${time}`;
 };
 
+// Omvandlar databassvar till mer UX-vänliga svenska varianter
 export const formatErrorMsg = (error) => {
   if (error === null) return;
 
-  console.log("från formateringsfunk: ", error.data.message);
-
-  if (error.data.message === `"message" is required`) return "Skriv ett meddelande.";
+  if (error.data.message === `"message" is required`) return "Meddelandet får inte vara tomt.";
   else if (error.data.message === `"message" length must be at least 5 characters long`) return "Meddelandet måste vara minst 5 tecken.";
   else if (error.data.message === `"message" length must be less than or equal to 250 characters long`)
     return "Meddelandet får vara max 250 tecken.";

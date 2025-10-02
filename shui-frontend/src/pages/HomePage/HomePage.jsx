@@ -16,20 +16,11 @@ import { IoFilter } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa6";
 
 function HomePage() {
-  const [messages, setMessages] = useState([]);
-
-  const { isListEdited } = useContext(MessagesContext);
+  // Databasanropet sker i App.jsx och sparas i Context för att enkelt kunna nås av fler komponenter.
+  const { messages } = useContext(MessagesContext);
 
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-
-  useEffect(() => {
-    const setupMessages = async () => {
-      const response = await getMessages();
-      setMessages(response.data);
-    };
-    setupMessages();
-  }, [isListEdited]);
 
   const generateMessages = (arr) => {
     return arr.map((item) => <ListItem item={item} key={item.SK}></ListItem>);
