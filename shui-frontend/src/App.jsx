@@ -13,6 +13,7 @@ export const MessagesContext = createContext(null);
 
 function App() {
   const [messages, setMessages] = useState([]);
+  console.log("test");
 
   // En statevariabel som togglas när användaren raderar ett meddelande. I HomePage ligger en useEffect som lyssnar efter förändringar i isListEdited. När användaren raderar ett meddelande uppdateras meddelandelistan.
   const [isListEdited, setIsListEdited] = useState(false);
