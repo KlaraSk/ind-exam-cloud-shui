@@ -23,8 +23,6 @@ function LoginForm() {
     formState: { errors },
   } = useForm({ defaultValues: { username: "klara", password: "Test123!" } });
 
-  console.log(errors);
-
   const loginUser = async (data) => {
     const result = await loginApi(data);
 

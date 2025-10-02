@@ -8,15 +8,18 @@ import { createContext, useEffect, useState } from "react";
 import EditMessagePage from "./pages/EditMessagePage/EditMessagePage";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { getMessages } from "./api/messages";
+import { jwtDecode } from "jwt-decode";
+import { useAuthStore } from "./stores/useAuthStore";
 
 export const MessagesContext = createContext(null);
 
 function App() {
   const [messages, setMessages] = useState([]);
-  console.log("test");
 
   // En statevariabel som togglas när användaren raderar ett meddelande. I HomePage ligger en useEffect som lyssnar efter förändringar i isListEdited. När användaren raderar ett meddelande uppdateras meddelandelistan.
   const [isListEdited, setIsListEdited] = useState(false);
+
+  const login = useAuthStore((state) => state.login);
 
   useEffect(() => {
     const setupMessages = async () => {
@@ -26,8 +29,12 @@ function App() {
     setupMessages();
   }, [isListEdited]);
 
+  // Skydd mot utlogg vid reload
   useEffect(() => {
-    console.log("Sidan laddades om");
+    const token = localStorage.getItem("authToken");
+
+    const decoded = jwtDecode(token);
+    login({ username: decoded.attributes.username, role: decoded.attributes.role, token: token });
   }, []);
 
   const router = createBrowserRouter([

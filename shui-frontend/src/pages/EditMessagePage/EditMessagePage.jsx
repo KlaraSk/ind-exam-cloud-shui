@@ -30,8 +30,6 @@ function EditMessagePage() {
 
   const sendValidatedForm = async (e) => {
     e.preventDefault();
-    console.log("sendValidatedForm");
-    console.log(newMessage);
 
     const result = await putMessageById(messageId, newMessage, user.token);
     if (result.status === 200) {

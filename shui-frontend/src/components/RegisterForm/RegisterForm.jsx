@@ -30,11 +30,7 @@ function RegisterForm({ setIsLogin }) {
   console.log(errors);
 
   const registerUser = async (data) => {
-    console.log("data i registerUser: ", data);
-
-    // const result = await registerApi({ username: data.username, email: data.email, password: data.password, role: "GUEST" });
     const result = await registerApi({ ...data, role: "GUEST" });
-    console.log("result från registerForm", result);
 
     // Vid lyckad registrering sätts isLogin till true och användaren skickas till inloggningsformuläret.
     if (result.status === 201) {
