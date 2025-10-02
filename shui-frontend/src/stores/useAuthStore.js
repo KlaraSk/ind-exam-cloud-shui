@@ -1,7 +1,11 @@
+import { jwtDecode } from "jwt-decode";
 import { create } from "zustand";
 
+const token = localStorage.getItem("authToken");
+const initUser = token ? jwtDecode(token) : null;
+
 export const useAuthStore = create((set) => ({
-  user: null,
+  user: initUser,
   login: (user) => {
     set({ user: user });
   },

@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer";
 import HeaderChildren from "../../components/HeaderChildren/HeaderChildren";
 import FooterChildren from "../../components/FooterChildren/FooterChildren";
 import { MessagesContext } from "../../App";
+import { jwtDecode } from "jwt-decode";
 
 function AddMessagePage() {
   const navigate = useNavigate();
