@@ -1,0 +1,11 @@
+.header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  padding: 2rem 0rem 1rem 0rem;
+  z-index: 1;
+  background-color: var(--beige);
+  max-width: 430px;
+  width: 100%;
+  justify-content: center;
+}

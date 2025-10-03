@@ -1,0 +1,9 @@
+.header-children__title {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.header-children__back {
+  width: 100%;
+}

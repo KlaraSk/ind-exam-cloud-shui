@@ -1,0 +1,12 @@
+.message-form__label {
+  width: 100%;
+}
+
+.message-form__textarea {
+  border: none;
+  height: 100%;
+  resize: none;
+  background-color: var(--beige);
+
+  flex: 1;
+}

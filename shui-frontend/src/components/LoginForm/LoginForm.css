@@ -1,0 +1,24 @@
+.form {
+  width: 100%;
+  gap: 2rem;
+}
+
+.form__label {
+  gap: 0.25rem;
+}
+
+.form__input {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.form__input:focus {
+  border: none;
+  outline: none;
+  border: 2.5px solid var(--light-purple);
+}
+
+.form__error {
+  color: var(--red);
+}
