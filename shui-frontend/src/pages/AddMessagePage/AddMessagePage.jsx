@@ -11,6 +11,7 @@ import HeaderChildren from "../../components/HeaderChildren/HeaderChildren";
 import FooterChildren from "../../components/FooterChildren/FooterChildren";
 import { MessagesContext } from "../../App";
 import { jwtDecode } from "jwt-decode";
+import { toggleState } from "../../utils/utils";
 
 function AddMessagePage() {
   const navigate = useNavigate();
@@ -26,8 +27,7 @@ function AddMessagePage() {
     const result = await postMessage(newMessage, user.token);
 
     if (result.status === 201) {
-      const prevValue = isListEdited;
-      setIsListEdited(!prevValue);
+      toggleState(isListEdited, setIsListEdited);
       navigate("/");
     } else setError(result);
   };

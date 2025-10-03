@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { getMessages } from "../../api/messages";
+import { useContext } from "react";
 import "./HomePage.css";
 import List from "../../components/List/List";
 import ListItem from "../../components/ListItem/ListItem";
@@ -9,11 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { MessagesContext } from "../../App.jsx";
 import { MdModeEditOutline } from "react-icons/md";
-import { FaArrowDown } from "react-icons/fa6";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-import { IoFilter } from "react-icons/io5";
-import { FaUsers } from "react-icons/fa6";
+import Filters from "../../components/Filters/Filters.jsx";
 
 function HomePage() {
   // Databasanropet sker i App.jsx och sparas i Context för att enkelt kunna nås av fler komponenter.
@@ -29,45 +26,34 @@ function HomePage() {
   const handleLogout = () => {
     logout();
   };
+
   const handleLogin = () => {
     navigate("/konto");
   };
 
   return (
     <section className="page home-page font-color__dark-brown">
-      <Header className="home-page__header">
-        <div className="flex flex__column home-page__auth-btn">
-          <CircleButton onClick={!user ? handleLogin : handleLogout} aria-label={!user ? "Logga in" : "Logga ut"}>
-            {<FaUser />}
-          </CircleButton>
-          <BasicButton
-            onClick={!user ? handleLogin : handleLogout}
-            aria-label={!user ? "Logga in" : "Logga ut"}
-            className="label font-color__dark-brown"
-          >
-            {!user ? "Logga in" : "Logga ut"}
-          </BasicButton>
-          {user && <span className="label">{user.username}</span>}
-        </div>
+      <Header className=" flex__column">
+        <div className="flex flex__column page__wrapper home-page__header-content">
+          <div className="flex flex__column home-page__auth-btn">
+            <CircleButton onClick={!user ? handleLogin : handleLogout} aria-label={!user ? "Logga in" : "Logga ut"}>
+              {<FaUser />}
+            </CircleButton>
+            <BasicButton
+              onClick={!user ? handleLogin : handleLogout}
+              aria-label={!user ? "Logga in" : "Logga ut"}
+              className="label font-color__dark-brown"
+            >
+              {!user ? "Logga in" : "Logga ut"}
+            </BasicButton>
+            {user && <span className="label">{user.username}</span>}
+          </div>
 
-        <h1 className="heading-2 home-page__heading">Meddelanden</h1>
+          <h1 className="heading-2 home-page__heading">Meddelanden</h1>
+          <Filters />
+        </div>
       </Header>
       <section className="page__wrapper">
-        <section className="filters flex ">
-          <h2 className="heading-4 page__wrapper flex filters__title">
-            <IoFilter aria-hidden="true" />
-            Filter
-          </h2>
-          <BasicButton className="flex font-color__dark-brown page__wrapper">
-            {<span className="label">Nyast först</span>}
-            {<FaArrowDown aria-hidden="true" className="font-color__dark-purple" />}
-          </BasicButton>
-          <BasicButton className="flex font-color__dark-brown page__wrapper">
-            {<span className="label">Användare</span>}
-            {<FaUsers aria-hidden="true" className="font-color__dark-purple" />}
-          </BasicButton>
-        </section>
-
         <List>{messages && generateMessages(messages)}</List>
       </section>
 

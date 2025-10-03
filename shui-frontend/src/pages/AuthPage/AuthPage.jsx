@@ -5,14 +5,11 @@ import "./AuthPage.css";
 import RegisterForm from "../../components/RegisterForm/RegisterForm.jsx";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header.jsx";
+import { toggleState } from "../../utils/utils.js";
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
-  const toggleForm = () => {
-    const prevValue = isLogin;
-    setIsLogin(!prevValue);
-  };
 
   return (
     <section className="page flex flex__column auth-page">
@@ -22,7 +19,7 @@ function AuthPage() {
         </BasicButton>
       </Header>
       {isLogin ? <LoginForm /> : <RegisterForm setIsLogin={setIsLogin} />}
-      <LinkButtonRed className="heading-4" onClick={toggleForm}>
+      <LinkButtonRed className="heading-4" onClick={() => toggleState(isLogin, setIsLogin)}>
         {isLogin ? "Registrera konto" : "Har du redan ett konto?"}
       </LinkButtonRed>
       <LinkButtonPurple onClick={() => navigate("/")} className="heading-4">

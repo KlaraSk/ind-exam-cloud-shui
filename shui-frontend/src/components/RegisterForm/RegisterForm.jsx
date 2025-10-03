@@ -8,9 +8,6 @@ import { PurpleButton } from "../../components-styled/Button/Button.styles";
 function RegisterForm({ setIsLogin }) {
   const form = useRef();
 
-  let navigate = useNavigate();
-  const { setToken } = useAuthToken();
-
   // Standard-regex för mail från MDN
   const emailRegExp = /^[\w.!#$%&'*+/=?^`{|}~-]+@[a-z\d-]+(?:\.[a-z\d-]+)*$/i;
 
@@ -26,8 +23,6 @@ function RegisterForm({ setIsLogin }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: { username: "", password: "", email: "" } });
-
-  console.log(errors);
 
   const registerUser = async (data) => {
     const result = await registerApi({ ...data, role: "GUEST" });

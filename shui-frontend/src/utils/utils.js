@@ -21,3 +21,26 @@ export const formatErrorMsg = (error) => {
   else if (error.data.message === `"message" length must be less than or equal to 250 characters long`)
     return "Meddelandet får vara max 250 tecken.";
 };
+
+export const sortByDate = (data, isNewestFirst) => {
+  // Konverterar isodatumsträngarna till Date-objekt, vilket gör att datumet formateras om till millisekunder i sort-funktionen.
+  const oldestFirst = [...data].sort(function (a, b) {
+    return new Date(a.attributes.createdAt) - new Date(b.attributes.createdAt);
+  });
+
+  if (!isNewestFirst) return oldestFirst;
+  else if (isNewestFirst) return oldestFirst.reverse();
+};
+
+export const filterMessages = (arr, usersArr) => {
+  const filteredMessagesArr = usersArr.flatMap((user) => {
+    const filteredMessages = arr.filter((obj) => obj.attributes.user === user);
+    return filteredMessages;
+  });
+  return filteredMessagesArr;
+};
+
+export const toggleState = (bool, setState) => {
+  const prevValue = bool;
+  setState(!prevValue);
+};
