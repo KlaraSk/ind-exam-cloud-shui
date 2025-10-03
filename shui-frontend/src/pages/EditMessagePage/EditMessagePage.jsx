@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { putMessageById } from "../../api/messages";
-import "./EditMessagePage.css";
 import Header from "../../components/Header/Header";
 import HeaderChildren from "../../components/HeaderChildren/HeaderChildren";
 import Footer from "../../components/Footer/Footer";

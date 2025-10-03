@@ -7,4 +7,5 @@
   background-color: var(--beige);
   max-width: 430px;
   width: 100%;
+  justify-content: center;
 }

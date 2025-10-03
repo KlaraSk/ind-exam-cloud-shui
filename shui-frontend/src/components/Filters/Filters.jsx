@@ -6,9 +6,9 @@ import Checkboxes from "../Checkboxes/Checkboxes";
 import { filterMessages, sortByDate, toggleState } from "../../utils/utils";
 import SortArrows from "../SortArrows/SortArrows";
 
-// * Valde mellan att använda mitt API-anrop med inbyggda queryparameterar eller att utgå från listan med alla meddelanden som hämtas från databasen vid start. Valde det sistnämnda alternativet av två anledningar:
+// * Valde mellan att använda mitt API-anrop som har inbyggda queryparameterar (sort och user) eller att utgå från listan med alla meddelanden som hämtas från databasen vid start. Valde det sistnämnda alternativet av två anledningar:
 // * 1. Hålla nere antalet API-anrop.
-// * 2. Ha möjlighet att välja flera användare, utan att behöva bygga om API-anropet.
+// * 2. Ha möjlighet att filtrera på fler än en användare, utan att behöva bygga om API-anropet.
 
 function Filters() {
   // Context

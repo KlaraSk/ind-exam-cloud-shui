@@ -11,6 +11,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import Filters from "../../components/Filters/Filters.jsx";
+import ScrollButton from "../../components/ScrollButton/ScrollButton.jsx";
 
 function HomePage() {
   // Databasanropet sker i App.jsx och sparas i Context för att enkelt kunna nås av fler komponenter.
@@ -65,6 +66,7 @@ function HomePage() {
         >
           <MdModeEditOutline />
         </SquareButton>
+        <ScrollButton></ScrollButton>
       </Footer>
     </section>
   );
