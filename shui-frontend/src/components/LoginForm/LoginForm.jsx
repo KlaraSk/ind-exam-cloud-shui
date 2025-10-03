@@ -20,7 +20,7 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { username: "klara", password: "Test123!" } });
+  } = useForm({ defaultValues: { username: "", password: "" } });
 
   const loginUser = async (data) => {
     const result = await loginApi(data);

@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { postMessage } from "../../api/messages";
-import "./AddMessagePage.css";
 import MessageForm from "../../components/MessageForm/MessageForm";
 
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ import Footer from "../../components/Footer/Footer";
 import HeaderChildren from "../../components/HeaderChildren/HeaderChildren";
 import FooterChildren from "../../components/FooterChildren/FooterChildren";
 import { MessagesContext } from "../../App";
-import { jwtDecode } from "jwt-decode";
 import { toggleState } from "../../utils/utils";
 
 function AddMessagePage() {

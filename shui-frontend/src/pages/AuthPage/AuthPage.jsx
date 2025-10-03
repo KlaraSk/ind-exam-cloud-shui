@@ -14,7 +14,7 @@ function AuthPage() {
   return (
     <section className="page flex flex__column auth-page">
       <Header>
-        <BasicButton onClick={() => navigate("/")}>
+        <BasicButton onClick={() => navigate("/")} className="flex">
           <img className="auth-page__logo" src="./shui-logo.png" alt="Shui" />
         </BasicButton>
       </Header>

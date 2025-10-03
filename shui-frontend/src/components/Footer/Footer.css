@@ -3,4 +3,5 @@
   background-color: var(--beige);
   padding: 3.5rem 0rem;
   gap: 1.5rem;
+  justify-content: center;
 }

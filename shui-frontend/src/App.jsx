@@ -22,6 +22,7 @@ function App() {
   const [isListEdited, setIsListEdited] = useState(false);
 
   const login = useAuthStore((state) => state.login);
+  const { logout } = useAuthStore();
 
   useEffect(() => {
     const setupMessages = async () => {
@@ -48,12 +49,17 @@ function App() {
     // console.log("usersArr: ", usersArr);
   }, [allMessages]);
 
-  // Skydd mot utlogg vid reload
+  // Skydd mot utlogg vid reload, men om token har gått ut loggas användaren ut.
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-
     const decoded = jwtDecode(token);
-    login({ username: decoded.attributes.username, role: decoded.attributes.role, token: token });
+    const isExpired = decoded.exp * 1000 < Date.now();
+
+    if (isExpired) {
+      logout();
+    } else if (!isExpired) {
+      login({ username: decoded.attributes.username, role: decoded.attributes.role, token: token });
+    }
   }, []);
 
   const router = createBrowserRouter([

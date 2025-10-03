@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./MessageMenu.css";
 import { HiDotsVertical } from "react-icons/hi";
 import clsx from "clsx";
@@ -12,11 +12,14 @@ import { useNavigate } from "react-router-dom";
 import { toggleState } from "../../utils/utils";
 
 function MessageMenu({ messageId }) {
+  // State och hooks
   const [isOpen, setIsOpen] = useState(false);
-  const { isListEdited, setIsListEdited } = useContext(MessagesContext);
-
-  const { user } = useAuthStore();
   const navigate = useNavigate();
+
+  // Context och Zustand
+  const { isListEdited, setIsListEdited } = useContext(MessagesContext);
+  const { user } = useAuthStore();
+
   const classnames = clsx("label menu__list flex flex__column", {
     "d-none": !isOpen,
   });
