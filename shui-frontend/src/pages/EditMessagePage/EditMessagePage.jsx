@@ -9,6 +9,7 @@ import MessageForm from "../../components/MessageForm/MessageForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { MessagesContext } from "../../App";
+import { toggleState } from "../../utils/utils";
 
 function EditMessagePage() {
   const [oldMessage, setOldMessage] = useState({});
@@ -25,23 +26,27 @@ function EditMessagePage() {
   // Hämtar det gamla meddelandet
   useEffect(() => {
     const getMessageById = messages?.filter((obj) => obj.GSI1SK === messageId);
-    setOldMessage(getMessageById);
+
+    setOldMessage({ message: getMessageById[0]?.attributes.message });
   }, [messages]);
+
+  // Sätter det gamla meddelandet som nytt. Används som backup om användaren inte vill ändra något.
+  useEffect(() => {
+    setNewMessage(oldMessage);
+  }, [oldMessage]);
 
   const sendValidatedForm = async (e) => {
     e.preventDefault();
 
     const result = await putMessageById(messageId, newMessage, user.token);
     if (result.status === 200) {
-      const prevValue = isListEdited;
-      setIsListEdited(!prevValue);
+      toggleState(isListEdited, setIsListEdited);
       navigate("/");
     } else setError(result);
   };
 
   return (
     <section className="page">
-      {" "}
       <Header className="add-message-page__header">
         <HeaderChildren title="Ändra meddelande" />
       </Header>

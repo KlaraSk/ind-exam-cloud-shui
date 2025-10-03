@@ -1,8 +1,17 @@
 import axios from "axios";
 
-export const getMessages = async () => {
+export const getMessages = async (sortquery, userquery) => {
+  const generateUrl = () => {
+    if (!sortquery && !userquery) return `https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages?sort=newest`;
+    else if (sortquery === "oldest") return `https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages?sort=oldest`;
+    else if (sortquery === "newest" && userquery)
+      return `https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages?sort=newest&user=${userquery}`;
+    else if (sortquery === "oldest" && userquery)
+      return `https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages?sort=oldest&user=${userquery}`;
+  };
+
   const response = await axios
-    .get("https://ieu86c24ti.execute-api.eu-north-1.amazonaws.com/api/messages?sort=newest")
+    .get(generateUrl())
     .then((response) => {
       return response;
     })

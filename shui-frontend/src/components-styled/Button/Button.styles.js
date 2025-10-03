@@ -27,6 +27,15 @@ export const SquareButton = styled(BasicButton)`
   color: var(--white);
 `;
 
+export const SquareButtonSmall = styled(SquareButton)`
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  border-radius: 8px;
+
+  border: 1.5px solid var(--light-purple);
+  color: var(--white);
+`;
+
 export const LinkButton = styled(BasicButton)`
   color: var(--dark-brown);
   position: relative;

@@ -14,7 +14,6 @@ function LoginForm() {
   let navigate = useNavigate();
   const { setToken } = useAuthToken();
   const login = useAuthStore((state) => state.login);
-  const { user } = useAuthStore();
 
   // Validering från React Form
   const {

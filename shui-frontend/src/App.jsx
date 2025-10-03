@@ -14,20 +14,39 @@ import { useAuthStore } from "./stores/useAuthStore";
 export const MessagesContext = createContext(null);
 
 function App() {
+  const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  // En statevariabel som togglas när användaren raderar ett meddelande. I HomePage ligger en useEffect som lyssnar efter förändringar i isListEdited. När användaren raderar ett meddelande uppdateras meddelandelistan.
+  // En statevariabel som togglas när användaren raderar eller uppdaterar ett meddelande.
   const [isListEdited, setIsListEdited] = useState(false);
 
   const login = useAuthStore((state) => state.login);
 
   useEffect(() => {
     const setupMessages = async () => {
+      console.log("setupMessages()");
+
       const response = await getMessages();
-      setMessages(response.data);
+      setAllMessages(response.data);
     };
     setupMessages();
   }, [isListEdited]);
+
+  useEffect(() => {
+    setMessages(allMessages);
+  }, [allMessages]);
+
+  useEffect(() => {
+    // Extraherar nyckelvärdet user ur varje objekt
+    const users = allMessages.map((obj) => obj.attributes.user);
+    // Får bort alla dubbletter, men omvandlar till ett objekt
+    const removeDuplicates = new Set(users);
+    // Tjoffar tillbaka allt i en array
+    // const usersArr = [...removeDuplicates];
+    setUsers([...removeDuplicates]);
+    // console.log("usersArr: ", usersArr);
+  }, [allMessages]);
 
   // Skydd mot utlogg vid reload
   useEffect(() => {
@@ -66,7 +85,7 @@ function App() {
   ]);
 
   return (
-    <MessagesContext.Provider value={{ isListEdited, setIsListEdited, messages }}>
+    <MessagesContext.Provider value={{ isListEdited, setIsListEdited, setMessages, messages, users, allMessages, setAllMessages }}>
       <div className="app ">
         <RouterProvider router={router} />
       </div>

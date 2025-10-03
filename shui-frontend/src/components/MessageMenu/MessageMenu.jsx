@@ -9,6 +9,7 @@ import { deleteMessage } from "../../api/messages";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { MessagesContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { toggleState } from "../../utils/utils";
 
 function MessageMenu({ messageId }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,24 +21,18 @@ function MessageMenu({ messageId }) {
     "d-none": !isOpen,
   });
 
-  const toggleOpen = () => {
-    const prevValue = isOpen;
-    setIsOpen(!prevValue);
-  };
-
   const handleEditMsg = () => {
     navigate(`/meddelande/${messageId}`);
   };
 
   const handleDeleteMsg = async () => {
     await deleteMessage(messageId, user.token);
-    const prevValue = isListEdited;
-    setIsListEdited(!prevValue);
+    toggleState(isListEdited, setIsListEdited);
   };
 
   return (
     <nav className="menu">
-      <BasicButton onClick={toggleOpen}>
+      <BasicButton aria-label="Menu uppdatera meddelande" onClick={() => toggleState(isOpen, setIsOpen)}>
         <HiDotsVertical />
       </BasicButton>
 

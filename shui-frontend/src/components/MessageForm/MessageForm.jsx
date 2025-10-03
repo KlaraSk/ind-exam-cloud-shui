@@ -23,8 +23,7 @@ function MessageForm({ sendValidatedForm, newMessage, setNewMessage, error, isEd
         {isEditPage && (
           <textarea
             className="message-form__textarea body"
-            defaultValue={oldMessage[0]?.attributes.message}
-            // defaultValue={"hej"}
+            defaultValue={oldMessage.message}
             value={newMessage.message}
             onChange={handleChange}
             placeholder="Skriv ett meddelande..."
