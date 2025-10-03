@@ -49,16 +49,19 @@ function App() {
     // console.log("usersArr: ", usersArr);
   }, [allMessages]);
 
-  // Skydd mot utlogg vid reload, men om token har gått ut loggas användaren ut.
+  // Skydd mot utlogg vid reload. Om token har gått ut loggas användaren ut.
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    const decoded = jwtDecode(token);
-    const isExpired = decoded.exp * 1000 < Date.now();
 
-    if (isExpired) {
-      logout();
-    } else if (!isExpired) {
-      login({ username: decoded.attributes.username, role: decoded.attributes.role, token: token });
+    if (token) {
+      const decoded = jwtDecode(token);
+      const isExpired = decoded.exp * 1000 < Date.now();
+
+      if (isExpired) {
+        logout();
+      } else if (!isExpired) {
+        login({ username: decoded.attributes.username, role: decoded.attributes.role, token: token });
+      }
     }
   }, []);
 
